@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @RedisHash("CreditPayment")
-public class CreditPayment  implements Serializable{
+public class CreditPayment implements Serializable{
 
   private static final long serialVersionUID = 3806294380217672547L;
         @Id

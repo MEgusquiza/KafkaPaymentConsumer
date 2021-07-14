@@ -21,7 +21,7 @@ import com.bank.service.CreditConsumerService;
 
 
 @RestController
-@RequestMapping("/credit")
+@RequestMapping("/consumer")
 @EnableCaching
 public class CreditConsumerController {
      
@@ -32,7 +32,7 @@ public class CreditConsumerController {
      
      CreditPayment paymentFromTopic = null; 
 	 
-  	    @GetMapping("/cosumer/payment")
+  	    @GetMapping("/payment")
         public CreditPayment consumerPaymentMessage() {
           logger.info("Retrive credit payment");
         return paymentFromTopic;

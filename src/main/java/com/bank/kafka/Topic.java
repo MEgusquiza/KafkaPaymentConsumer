@@ -18,8 +18,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import com.bank.model.CreditPayment;
-
-//import com.bank.model.CreditConsumer;
+import com.bank.utils.ConsumerYankiUtils;
 
 
 @Configuration
@@ -32,7 +31,7 @@ public class Topic {
 	public NewTopic creditPaymentTransactionTopic() {
       logger.info("Create topic, credit-consumer-topic");
 		return TopicBuilder
-				.name("credit-consumer-topic")
+				.name(ConsumerYankiUtils.RESPONSE_CONSUMER_TOPIC)
 				.partitions(1)
 				.replicas(1)
 				.build();
@@ -41,10 +40,10 @@ public class Topic {
 	@Bean
 	public ConsumerFactory<String, CreditPayment> paymentConsumerFactory() {
 		Map<String, Object> configs = new HashMap<>();
-		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, ConsumerYankiUtils.SERVER_CONFIG );
 		configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-		configs.put(ConsumerConfig.GROUP_ID_CONFIG,"credit-payment-consumer-yanki"); 
+		configs.put(ConsumerConfig.GROUP_ID_CONFIG,ConsumerYankiUtils.CONSUMER_GROUP); 
 		return new DefaultKafkaConsumerFactory<>(configs,new StringDeserializer(),new JsonDeserializer<>(CreditPayment.class,false));
 	}
 	
