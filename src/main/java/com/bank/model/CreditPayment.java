@@ -10,15 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RedisHash("CreditConsumer")
-public class CreditConsumer implements Serializable {
+@RedisHash("CreditPayment")
+public class CreditPayment  implements Serializable{
 
-  private static final long serialVersionUID = -1121869869398552288L;
-
+  private static final long serialVersionUID = 3806294380217672547L;
         @Id
-		private int id;
-		private int phone;
-		private Double amount;
-		private String description = "";	
+        private int id;
+        private int phone;
+        private Double amount;
+        private String description = "";    
 
 }

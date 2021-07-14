@@ -4,35 +4,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
-import com.bank.model.CreditConsumer;
+
+import com.bank.model.CreditPayment;
 import com.bank.service.CreditConsumerService;
 
 
 @Repository
 public class CreditConsumerServiceImpl implements CreditConsumerService{
       
- public static final String HASH_KEY = "CreditConsumer";       
+ public static final String HASH_KEY = "CreditPayment";       
          @Autowired
          private RedisTemplate template;
 
  	     @Override
-	     public CreditConsumer findById(int id) {
-	     System.out.println("called findProductById() from DB");
-	     return (CreditConsumer) template.opsForHash().get(HASH_KEY,id);
+	     public CreditPayment findById(int id) {
+	     return (CreditPayment) template.opsForHash().get(HASH_KEY,id);
          }
 
 	    @Override
-	    public List<CreditConsumer> findAll() {
+	    public List<CreditPayment> findAll() {
 	      return template.opsForHash().values(HASH_KEY);
 	    }
 
 	    @Override
-	    public CreditConsumer update(CreditConsumer creditConsumer) {
+	    public CreditPayment update(CreditPayment creditConsumer) {
 	     return save(creditConsumer);
 	    }
 
 	    @Override
-	    public CreditConsumer save(CreditConsumer creditConsumer) {
+	    public CreditPayment save(CreditPayment creditConsumer) {
 	      template.opsForHash().put(HASH_KEY,creditConsumer.getId(),creditConsumer);
 	        return creditConsumer;
 	    }

@@ -17,7 +17,9 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import com.bank.model.CreditConsumer;
+import com.bank.model.CreditPayment;
+
+//import com.bank.model.CreditConsumer;
 
 
 @Configuration
@@ -37,26 +39,20 @@ public class Topic {
 	}
 	
 	@Bean
-	public ConsumerFactory<String, CreditConsumer> paymentConsumerFactory() {
+	public ConsumerFactory<String, CreditPayment> paymentConsumerFactory() {
 		Map<String, Object> configs = new HashMap<>();
 		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 		configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 		configs.put(ConsumerConfig.GROUP_ID_CONFIG,"credit-payment-consumer-yanki"); 
-		return new DefaultKafkaConsumerFactory<>(configs,new StringDeserializer(),new JsonDeserializer<>(CreditConsumer.class,false));
+		return new DefaultKafkaConsumerFactory<>(configs,new StringDeserializer(),new JsonDeserializer<>(CreditPayment.class,false));
 	}
 	
 	 @Bean
-	 public ConcurrentKafkaListenerContainerFactory<String,CreditConsumer> paymentKafkaListenerContainerFactory(){
-	 ConcurrentKafkaListenerContainerFactory<String,CreditConsumer> factory = new ConcurrentKafkaListenerContainerFactory<String,CreditConsumer>();
+	 public ConcurrentKafkaListenerContainerFactory<String,CreditPayment> paymentKafkaListenerContainerFactory(){
+	 ConcurrentKafkaListenerContainerFactory<String,CreditPayment> factory = new ConcurrentKafkaListenerContainerFactory<String,CreditPayment>();
 	 factory.setConsumerFactory(paymentConsumerFactory());
 	 return factory;
 	 } 
 	 
-   /* 
-    @Bean 
-    public KafkaTemplate<String, CreditConsumer> kafkaTemplate() {
-    return new KafkaTemplate<>(consumerFactory());
-    }*/
-	
 }

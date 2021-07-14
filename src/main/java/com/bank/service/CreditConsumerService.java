@@ -1,7 +1,8 @@
 package com.bank.service;
 
-import com.bank.model.CreditConsumer;
+import com.bank.model.CreditPayment;
 
-public interface CreditConsumerService extends MaintenanceService<CreditConsumer>{
+
+public interface CreditConsumerService extends MaintenanceService<CreditPayment>{
 
 }

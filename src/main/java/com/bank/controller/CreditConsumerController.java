@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bank.model.CreditConsumer;
+import com.bank.model.CreditPayment;
 import com.bank.service.CreditConsumerService;
 
 
@@ -30,32 +30,32 @@ public class CreditConsumerController {
      @Autowired
      private CreditConsumerService service;
      
-	 CreditConsumer paymentFromTopic = null; 
+     CreditPayment paymentFromTopic = null; 
 	 
   	    @GetMapping("/cosumer/payment")
-        public CreditConsumer consumerPaymentMessage() {
+        public CreditPayment consumerPaymentMessage() {
           logger.info("Retrive credit payment");
         return paymentFromTopic;
          }
 	  
 	    @PostMapping
-	    public CreditConsumer save(@RequestBody CreditConsumer creditConsumer) {
+	    public CreditPayment save(@RequestBody CreditPayment creditConsumer) {
 	        return service.save(creditConsumer);
 	    }
 
 	    @GetMapping
-	    public List<CreditConsumer> getAllProducts() {
+	    public List<CreditPayment> getAllProducts() {
 	        return service.findAll();
 	    }
 
 	    @GetMapping("/{id}")
-	    @Cacheable(key = "#id",value = "CreditConsumer",unless = "#result.amount > 100")
-	    public CreditConsumer findProduct(@PathVariable int id) {
+	    @Cacheable(key = "#id",value = "CreditPayment",unless = "#result.amount > 100")
+	    public CreditPayment findProduct(@PathVariable int id) {
 	        return service.findById(id);
 	    }
 
 	    @DeleteMapping("/{id}")
-	    @CacheEvict(key = "#id",value = "CreditConsumer")
+	    @CacheEvict(key = "#id",value = "CreditPayment")
 	    public String remove(@PathVariable int id) {
 	        return service.delete(id);
 	    }
