@@ -22,8 +22,8 @@ public class CreditConsumerConsumer {
 	
 	@KafkaListener( groupId = ConsumerYankiUtils.CONSUMER_GROUP,topics = ConsumerYankiUtils.CONSUMER_TOPIC, containerFactory =ConsumerYankiUtils.CONTAINER_FACTORY)
 	public CreditPayment recoverCreatedCreditPayment(CreditPayment creditPayment) throws Exception {
-	    // creditConsumerService.update(creditPayment);
-	   logger.info("Recived transaction payment: {} ", creditPayment.toString() );
+	  logger.info("Recived transaction payment: {} ", creditPayment.toString() );
+	 // creditConsumerService.update(creditPayment);
 	  return creditPayment;
       }
 	

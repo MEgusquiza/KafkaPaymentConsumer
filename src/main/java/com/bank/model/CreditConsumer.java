@@ -18,6 +18,7 @@ public class CreditConsumer implements Serializable {
         @Id
 		private int id;
 		private int phone;
+		private String typePayment;
 		private Double amount;
 		private String description = "";	
 

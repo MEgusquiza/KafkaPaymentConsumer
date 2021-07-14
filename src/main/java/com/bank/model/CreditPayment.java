@@ -14,10 +14,12 @@ import lombok.NoArgsConstructor;
 public class CreditPayment implements Serializable{
 
   private static final long serialVersionUID = 3806294380217672547L;
-        @Id
-        private int id;
-        private int phone;
-        private Double amount;
-        private String description = "";    
+     
+      @Id
+      private int id;
+      private int phone;
+      private String typePayment;
+      private Double amount;
+      private String description = "";      
 
 }

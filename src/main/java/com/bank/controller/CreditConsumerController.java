@@ -44,13 +44,13 @@ public class CreditConsumerController {
 	    }
 
 	    @GetMapping
-	    public List<CreditPayment> getAllProducts() {
+	    public List<CreditPayment> getAllCreditPayments() {
 	        return service.findAll();
 	    }
 
 	    @GetMapping("/{id}")
 	    @Cacheable(key = "#id",value = "CreditPayment",unless = "#result.amount > 100")
-	    public CreditPayment findProduct(@PathVariable int id) {
+	    public CreditPayment findCreditPayment(@PathVariable int id) {
 	        return service.findById(id);
 	    }
 
